@@ -50,55 +50,55 @@ Node.random 为空（null）或指向链表中的节点。
 
 
 ## Solution
-
-    /*
-    // Definition for a Node.
-    class Node {
-    public:
-        int val;
+```C++
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+*/
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        Node* temp = head;
         Node* next;
+        Node* duplicate_head;
         Node* random;
-        
-        Node(int _val) {
-            val = _val;
-            next = NULL;
-            random = NULL;
+        if (head == NULL)
+            return NULL;
+        while (temp != NULL){
+            Node* duplicate = new Node(temp->val);
+            next = temp->next;
+            temp->next = duplicate;
+            duplicate->next = next;
+            temp = next;
         }
-    };
-    */
-    class Solution {
-    public:
-        Node* copyRandomList(Node* head) {
-            Node* temp = head;
-            Node* next;
-            Node* duplicate_head;
-            Node* random;
-            if (head == NULL)
-                return NULL;
-            while (temp != NULL){
-                Node* duplicate = new Node(temp->val);
-                next = temp->next;
-                temp->next = duplicate;
-                duplicate->next = next;
-                temp = next;
-            }
-            temp = head;
-            duplicate_head = temp->next;
-            while (temp != NULL){
-                next = temp->next->next;
-                random = temp->random;
-                if (random != NULL)
-                    temp->next->random = random->next;
-                temp = next;
-            }
-            temp = head;
-            while (temp != NULL){
-                next = temp->next->next;
-                if (next != NULL)
-                    temp->next->next = next->next;
-                temp->next = next;
-                temp = next;
-            }
-            return duplicate_head;
+        temp = head;
+        duplicate_head = temp->next;
+        while (temp != NULL){
+            next = temp->next->next;
+            random = temp->random;
+            if (random != NULL)
+                temp->next->random = random->next;
+            temp = next;
         }
-    };
+        temp = head;
+        while (temp != NULL){
+            next = temp->next->next;
+            if (next != NULL)
+                temp->next->next = next->next;
+            temp->next = next;
+            temp = next;
+        }
+        return duplicate_head;
+    }
+};
