@@ -8,7 +8,7 @@
 
 示例 1：
 
-![](img/Complex_Linked_List.png "Complex Linked List")
+![](../img/Complex_Linked_List.png "Complex Linked List")
 
 输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
 输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]
